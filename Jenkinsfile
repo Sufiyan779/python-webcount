@@ -4,15 +4,22 @@ pipeline{
  stages{
     stage('pull from vcs') {
         steps{
-            git url: 'https://github.com/Sufiyan779/openmrs-core.git',
-            branch: 'SPRINT_1_DEV'
+            git url: 'https://github.com/Sufiyan779/python-webcount.git',
+            branch: 'python'
         }
 
     }
-    stage('build'){
+    stage('archive result'){
         steps{
-            sh 'mvn package'
+            junit '**junit-py39.xml'
         }
+
+    }
+     stage('artifacts'){
+        steps{
+            archiveArtifacts artifacts: '**/webcount-0.1.zip'
+        }
+        
     }
  }   
 }
