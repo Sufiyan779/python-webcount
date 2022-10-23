@@ -21,22 +21,13 @@ pipeline{
         }
 
     }
-     stage('artifacts')
-    {
-        steps
-        {
-            archiveArtifacts artifacts: '.tox/.tmp/package/1/webcount-0.1.zip'
-        }
-        
-    }
     stage('archive result')
     {
         steps
         {
-        junit 'junit-py39.xml'
+        junit '**/*.xml'
         }
 
     }
  }
 }
-    
